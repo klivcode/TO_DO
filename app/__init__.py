@@ -14,8 +14,8 @@ def create_app():
     db.__init__(app)
     
     # blueprint register (mini app || module to know the flask)
-    from app.routes auth import auth_bp
-    from app.routes auth import tasks_bp
+    from app.routes.auth import auth_bp
+    from app.routes.auth import tasks_bp
     app.register_blueprint(auth_bp)
     app.register_blueprint(tasks_bp)
     return app

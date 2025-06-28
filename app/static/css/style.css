@@ -1,0 +1,92 @@
+body{
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f8f9fa;
+}
+
+.container{
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Header*/
+
+header{
+    background: linear-gradient(to_right, #0062E6, #33aeff);
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 2px 8px rgba(0, 0,0,0.1);
+}
+
+header> h1{
+    margin: 0;
+    font-size: 28px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+nav {
+    text-align: center;
+    margin-top: 18px;
+}
+nav >a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+
+nav a hover {
+color: #ffd700;
+}
+
+
+/*Footer*/
+
+footer{
+    background-color: #343a40;
+    color: #ccc;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 60px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+}
+
+/*Flash messages*/
+
+.flash.success{
+    color: green;
+
+}
+
+.flash.danger{
+    color: red;
+}
+.flash.info{
+    color: blue;
+}
+
+
+/*Login Form*/
+
+.login-box{
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 10 8px rgba(0,0,0,0.1);
+}
+
+.login-box>h2{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group > label{
+
+}

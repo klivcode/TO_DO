@@ -1,0 +1,76 @@
+##What are we building?
+
+A full stack "To-DO-List App with:
+
+###Core Features
+Feature   ->  Description
+User login  -> Users can log in with a username and passwod
+user logout  -> Users can safely log out
+Create task  -> Add new to-do tasks
+View tasks   ->  See all your tasks
+Update  -> Edit task name or mark it as done
+
+
+
+### Technologies & Tools We'll Use:
+Tool -> Why we are using it
+Flask  -> Our main Python web Framework
+SQLite  -> Simple database stored in a file
+SQLAlchemy  -> ORM to interact with the database using Python
+Flask-WTF   -> Form validation (e.g: login, add task)
+Jinga2  -> To render dynamic HTML
+Flask-Login   -> (Optional for later) Manage looged-in sessions
+
+
+#### Final Project Structure:
+
+todo_app/
+|
+|-----run.py               # Starts the app
+|
+|--app/
+|   |--__init__.py          # App factory, DB setup
+|   |
+|   |--models.py            # Database models (User, Task)
+|   |
+|   |---routes/
+|   |       |---__init__.py
+|   |       |---auth.py     # Login,logout routes
+|   |       |
+|   |       |---tasks.py    # add , update, delete, view tasks
+|   |
+|   |       
+|   |----templates/       
+|   |       |
+|   |       |---base.html       # main layout template
+|   |       |---login.html
+|   |       |---register.html
+|   |       |---tasks.html
+|   |       
+|   |       
+|   |----------static/      
+|                  |
+|                  |----css/
+|                  |      |
+|                  |      |---style.css
+|                  |----js/
+|                  |     |
+|                  |     |---script.js
+|                  
+
+
+
+# For production key points
+
+step1: define the Features
+step2: create a clean project structure
+step3: setup the app factory (__init__.py)---spine of app
+step4: create models
+step5: make routes
+step6: html template 
+step7: design with css, js
+step8: initialize database init__
+step9: create database
+step10: Test the app
+
+

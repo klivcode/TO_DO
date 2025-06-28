@@ -1,54 +1,62 @@
-
 {% extends 'base.html' %}
+
 {% block title %}
     Tasks
-{% endblock title %}
+{% endblock %}
 
 {% block content %}
-    <div class="task-box">
-        <h2>Your Tasks</h2>
-        <form class="task-form" action="{{ url_for('tasks.add_tasks')}}" method="POST">
-            <input type="text" name="title" placeholder="New task" required>
-            <button class="btn" type="submit">Add</button>
-        </form>
+<div class="container mt-4">
+    <h2 class="mb-4">Your Tasks</h2>
 
-        {% if tasks %}
-            <form action="{{url_for('tasks.clear_tasks')}}" method="POST">
-                <button type="submit" class="btn btn-clear">Clear All Tasks</button>
-            </form>
-            <br>
-            <table class="task-table">
-                <thead>
-                    <tr>
-                        <th>Task</th>
-                        <th>Status</th>
-                        <th>Change</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for task in tasks  %}
-                       <tr>
-                        <td>{{loop.index}}</td>
-                        <td>{{loop.title}}</td>
+    <form class="d-flex mb-3" action="{{ url_for('tasks.add_task') }}" method="POST" novalidate>
+        <input type="text" name="title" class="form-control me-2" placeholder="New task" required>
+        <button class="btn btn-primary" type="submit">Add</button>
+    </form>
 
-                        <td>
-                            <span class="badge {{tasks.status|lower}}">{{task.status}}</span>
-                        </td>
+    {% if tasks %}
+    <form action="{{ url_for('tasks.clear_tasks') }}" method="POST" class="mb-3">
+        <button type="submit" class="btn btn-danger">Clear All Tasks</button>
+    </form>
 
-                        <td>
-                            <form method="POST" action="{{url_for('tasks.toggle_status', task_id=task.id)}}">
-                                <button class="btn-small " type="submit">Next</button>
-                            </form>
-                        </td>
-                       </tr> 
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>No tasks yet. Add one above!</p>
-
-        {% endif %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">SN</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Change</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ task.title }}</td>
+                    <td>
+                        <span class="badge 
+                          {% if task.status == 'Pending' %}bg-warning
+                          {% elif task.status == 'Working' %}bg-info
+                          {% elif task.status == 'Done' %}bg-success
+                          {% else %}bg-secondary
+                          {% endif %}">
+                            {{ task.status }}
+                        </span>
+                    </td>
+                    <td>
+                        <form method="POST" action="{{ url_for('tasks.toggle_status', task_id=task.id) }}">
+                            <button class="btn btn-sm btn-outline-primary" type="submit">Next</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-
-    
-{% endblock content %}
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        No tasks yet. Add one above!
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

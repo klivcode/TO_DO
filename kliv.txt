@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TO-DO App{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>My To-Do App</h1>
+            <nav>
+                <a href="{{ url_for('tasks.view_tasks') }}">Home</a>
+                {% if 'user' in session %}
+                    <a href="{{ url_for('auth.logout') }}">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('auth.login') }}">Login</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; {{ 2025 }} My Flask To-Do App</p>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% extends 'base.html' %}
+{% block title %}
+    Tasks
+{% endblock title %}
+
+{% block content %}
+    <div class="task-box">
+        <h2>Your Tasks</h2>
+        <form class="task-form" action="{{ url_for('tasks.add_task')}}" method="POST">
+            <input type="text" name="title" placeholder="New task" required>
+            <button class="btn" type="submit">Add</button>
+        </form>
+
+        {% if tasks %}
+            <form  action="{{url_for('tasks.clear_tasks')}}" method="POST">
+                <button type="submit" class="btn btn-clear">Clear All Tasks</button>
+            </form>
+            <br>
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Task</th>
+                        <th>Status</th>
+                        <th>Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks  %}
+                       <tr>
+                        <td>{{loop.index}}</td>
+                       <td>{{ task.title}}</td>
+
+                        <td>
+                            <span class="badge {{task.status|lower}}">{{task.status}}</span>
+                        </td>
+
+                        <td>
+                            <form method="POST" action="{{url_for('tasks.toggle_status', task_id=task.id)}}">
+                                <button class="btn-small " type="submit">Next</button>
+                            </form>
+                        </td>
+                       </tr> 
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No tasks yet. Add one above!</p>
+
+        {% endif %}
+    </div>
+
+    
+{% endblock content %}
